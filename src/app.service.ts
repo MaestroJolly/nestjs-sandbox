@@ -19,4 +19,15 @@ export class AppService {
       }
     };
   }
+
+  createUser(data): object {
+    return {
+      name: data.name,
+      age: data.age
+    };
+  }
+
+  fetchAUser(params): string {
+    return `${params} user found`;
+  }
 }

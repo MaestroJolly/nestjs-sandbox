@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, HttpCode } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('v1')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -11,12 +11,22 @@ export class AppController {
   }
 
   @Get('next')
-  getNextPage(): string{
+  getNextPage(): string {
     return this.appService.getNextPage();
   }
 
-  @Get('v1/api/user')
-  getUser(): object{
+  @Get('api/user')
+  getUser(): object {
     return this.appService.getUser();
+  }
+
+  @Post('api/create')
+  createUser(@Body() body): object {
+    return this.appService.createUser(body);
+  }
+
+  @Get('api/fetch-user/:id')
+  fetchAUser(@Param('id') id): string {
+    return this.appService.fetchAUser(id);
   }
 }
